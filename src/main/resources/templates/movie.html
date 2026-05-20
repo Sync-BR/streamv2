@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMax - Filmes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #070a13;
+            color: #fff;
+        }
+
+        header {
+            height: 78px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #090d18;
+            border-bottom: 1px solid #1b2235;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #ff2b75;
+        }
+
+        nav {
+            display: flex;
+            gap: 26px;
+        }
+
+        nav a {
+            color: #cfd3df;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        nav a.active,
+        nav a:hover {
+            color: #ff2b75;
+        }
+
+        .search {
+            width: 260px;
+            padding: 12px 18px;
+            border-radius: 25px;
+            border: 1px solid #252d43;
+            background: #0f1424;
+            color: #fff;
+            outline: none;
+        }
+
+        .hero {
+            margin: 30px 6% 0;
+            min-height: 280px;
+            border-radius: 28px;
+            padding: 60px;
+            background: linear-gradient(to right, rgba(7, 10, 19, .98), rgba(7, 10, 19, .55)),
+            url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 560px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #d4d7df;
+            line-height: 1.6;
+        }
+
+        .container {
+            padding: 38px 6%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+        }
+
+        .categorias {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 42px;
+        }
+
+        .categoria {
+            min-width: 170px;
+            padding: 18px 16px;
+            border-radius: 18px;
+            background: #101626;
+            border: 1px solid #202941;
+            text-align: center;
+            cursor: pointer;
+            transition: .3s;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .categoria:hover,
+        .categoria.active {
+            background: #ff2b75;
+            border-color: #ff2b75;
+            transform: translateY(-4px);
+        }
+
+        .categoria .icone {
+            display: block;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .categoria .nome {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .select {
+            background: #101626;
+            color: white;
+            border: 1px solid #202941;
+            padding: 11px 16px;
+            border-radius: 12px;
+        }
+
+        .filmes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 26px;
+        }
+
+        .filme-card {
+            background: #101626;
+            border: 1px solid #202941;
+            border-radius: 22px;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .filme-card:hover {
+            transform: translateY(-7px);
+            border-color: #ff2b75;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, .35);
+        }
+
+        .poster {
+            height: 315px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .info {
+            padding: 18px;
+        }
+
+        .info h3 {
+            font-size: 18px;
+            min-height: 44px;
+            margin-bottom: 8px;
+        }
+
+        .meta {
+            color: #9ca3b8;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .tags span {
+            padding: 5px 9px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .quality {
+            background: #ff2b75;
+        }
+
+        .size {
+            background: #232b40;
+            color: #cfd3df;
+        }
+
+        .btn-download {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            padding: 12px;
+            border: 1px solid #ff2b75;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: .3s;
+        }
+
+        .btn-download:hover {
+            background: #ff2b75;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 30px 6%;
+            background: #05070d;
+            color: #8a91a3;
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                height: auto;
+                padding: 20px 6%;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search {
+                width: 100%;
+            }
+
+            .hero {
+                padding: 36px;
+                margin-top: 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">CineMax</div>
+
+    <nav>
+        <a th:href="@{/}">Início</a>
+        <a th:href="@{/filmes}" class="active">Filmes</a>
+        <a href="#">Séries</a>
+    </nav>
+
+    <input class="search" type="text" placeholder="Buscar filmes...">
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Filmes</h1>
+        <p>Explore categorias, veja os filmes em destaque e escolha o conteúdo que deseja baixar.</p>
+    </div>
+</section>
+
+<main class="container">
+
+    <div class="section-header">
+        <h2>Categorias</h2>
+    </div>
+
+    <section class="categorias">
+
+        <a th:href="@{/filmes}" class="categoria active">
+            <span class="icone">🎬</span>
+            <span class="nome">Todos</span>
+        </a>
+
+        <a class="categoria"
+           th:each="cat : ${category}"
+           href="javascript:void(0)"
+           th:attr="data-category-id=${cat.categoryId}">
+
+            <span class="icone">🎞️</span>
+            <span class="nome" th:text="${cat.categoryName}">FILMES | AÇÃO</span>
+        </a>
+
+    </section>
+
+    <div class="section-header">
+        <h2>Filmes em destaque</h2>
+
+        <select class="select">
+            <option>Mais recentes</option>
+            <option>Mais baixados</option>
+            <option>Melhor qualidade</option>
+        </select>
+    </div>
+
+    <section class="filmes">
+
+        <div class="filme-card" th:each="filme : ${listMovie}">
+            <div class="poster"
+                 th:style="'background-image: url(' + ${filme.streamIcon} + ')'">
+            </div>
+
+            <div class="info">
+                <h3 th:text="${filme.name}">Nome do Filme</h3>
+                <p class="meta" th:text="${filme.genre + ' • ' + filme.releaseDate}">
+                    Ação • 2026
+                </p>
+
+                <div class="tags">
+                    <span class="quality" th:text="${filme.containerExtension}">mp4</span>
+                    <span class="size" th:text="${filme.rating + ' ⭐'}">8.5 ⭐</span>
+                </div>
+
+                <a th:href="@{/download-video/{id}(id=${filme.streamId})}"
+                   class="btn-download">
+                    Baixar
+                </a></div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    © 2026 CineMax — Página exemplo de filmes
+</footer>
+
+</body>
+</html>

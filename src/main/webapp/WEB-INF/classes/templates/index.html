@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineMax Download</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #050510;
+            color: white;
+        }
+
+        header {
+            padding: 28px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 900;
+            color: #ff2b75;
+        }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            margin-left: 28px;
+            font-weight: 600;
+        }
+
+        .hero {
+            padding: 50px 8%;
+            min-height: calc(100vh - 90px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            max-width: 850px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #ff2b75;
+        }
+
+        .hero p {
+            color: #b8b8c8;
+            font-size: 20px;
+            max-width: 650px;
+            margin-bottom: 50px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 35px;
+        }
+
+        .card {
+            height: 420px;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 25px 70px rgba(0,0,0,.6);
+            transition: .4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-14px) scale(1.02);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.12);
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.1));
+        }
+
+        .card-content {
+            position: absolute;
+            z-index: 2;
+            bottom: 35px;
+            left: 35px;
+            right: 35px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #ff2b75;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .card h2 {
+            font-size: 44px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #eee;
+            font-size: 17px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 50px;
+            background: white;
+            color: #111;
+            font-weight: 800;
+        }
+
+        .series .tag {
+            background: #00d9ff;
+            color: #001018;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 850px) {
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                height: 340px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">CineMax</div>
+
+    <nav>
+        <a href="#">Início</a>
+        <a href="#">Filmes</a>
+        <a href="#">Séries</a>
+    </nav>
+</header>
+
+<main class="hero">
+    <h1>Escolha seu <span>entretenimento</span> favorito</h1>
+    <p>Uma plataforma moderna para organizar downloads de filmes e séries pelo navegador.</p>
+
+    <section class="cards">
+
+        <a href="filmes.html" class="card">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80" alt="Filmes">
+            <div class="card-content">
+                <span class="tag">Catálogo de filmes</span>
+                <h2>Filmes</h2>
+                <p>Escolha filmes disponíveis e inicie o download diretamente pelo navegador.</p>
+                <div class="btn">Ver Filmes</div>
+            </div>
+        </a>
+
+        <a href="series.html" class="card series">
+            <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=1200&q=80" alt="Séries">
+            <div class="card-content">
+                <span class="tag">Temporadas e episódios</span>
+                <h2>Séries</h2>
+                <p>Organize episódios, temporadas e downloads em uma interface simples.</p>
+                <div class="btn">Ver Séries</div>
+            </div>
+        </a>
+
+    </section>
+</main>
+
+<footer>
+    © 2026 CineMax — Template de downloads
+</footer>
+
+</body>
+</html>
