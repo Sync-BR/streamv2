@@ -10,4 +10,4 @@ RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "target/streamv2.jar"]
+CMD ["java", "-jar", "target/stream.jar"]
