@@ -42,8 +42,7 @@ public class MovieService {
                 HttpResponse.BodyHandlers.ofString()
         );
 
-        System.out.println("STATUS: " + response.statusCode());
-        System.out.println("BODY: " + response.body());
+
 
         if (response.statusCode() != 200) {
             throw new RuntimeException("Erro ao buscar categorias. Status: " + response.statusCode());
