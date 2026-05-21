@@ -41,8 +41,7 @@ public class RequestUtil {
         return HttpRequest.newBuilder()
                 .uri(URI.create(serverPanel+streamId+".mp4"))
                 .header("User-Agent", "Mozilla/5.0")
-                .header("Accept", "*/*")
-                .header("Connection", "keep-alive")
+                .header("Accept", "*/*")         
                 .GET()
                 .build();
     }
