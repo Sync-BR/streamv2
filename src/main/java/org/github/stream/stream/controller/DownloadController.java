@@ -20,6 +20,7 @@ public class DownloadController {
     public DownloadController(RequestUtil util) {
         this.util = util;
     }
+
     @GetMapping("/download-video/{streamId}")
     public ResponseEntity<InputStreamResource> downloadVideo(@PathVariable Long streamId) throws Exception {
 
