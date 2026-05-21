@@ -27,9 +27,9 @@ public class DownloadController {
 
         HttpResponse<InputStream> response = util.createResponse(streamId);
 
-        if (response.statusCode() != 200) {
-            return ResponseEntity.status(response.statusCode()).build();
-        }
+//        if (response.statusCode() != 200) {
+//            return ResponseEntity.status(response.statusCode()).build();
+//        }
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"filme-" + streamId + ".mp4\"")
